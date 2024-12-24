@@ -1,0 +1,194 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+    <table:Table id="table4" rows="{oTableItemModel>/aTableItem}" selectionMode="MultiToggle">
+        <table:extension>
+            <OverflowToolbar style="Clear">
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add" tooltip="Add item" press="onAddNewRows" />
+                <Button icon="sap-icon://delete" tooltip="Delete Table records" press="onDeleteSelectedData" />
+            </OverflowToolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="11rem">
+                <Label text="PO Number" />
+                <table:template>
+                    <Input maxLength="10" value="{oTableItemModel>Ebeln}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Item" />
+                <table:template>
+                    <Input maxLength="6" value="{oTableItemModel>GateItem}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Vendor Code" />
+                <table:template>
+                    <Input value="{oTableItemModel>Lifnr}" editable="{oGenericModel>/editable}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequest">
+                        <customData>
+                            <core:CustomData key="VC" />
+                        </customData>
+                    </Input>
+                    <!-- <SearchField placeholder="Search for Business Unit" enableSuggestions="true" search=".onSearch1" suggest=".onSuggest" suggestionItems="{path: '/SUPPLER'}" id="searchField">
+                        <SuggestionItem text="{Supplier}" description="{path:'SupplierName'}" key="{Supplier}" />
+                    </SearchField> -->
+                    <!-- <Input maxLength="10" submit="searchSupplier" value="{oTableItemModel>Lifnr}" showSuggestion="true" suggest="handleSuggest" suggestionItems="{path:'/SUPPLIER', templateShareable:false}">
+                        <suggestionItems>
+                            <core:Item text="{Supplier}" />
+                        </suggestionItems>
+                    </Input> -->
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Vendor Name " />
+                <table:template>
+                    <Input maxLength="100" value="{oTableItemModel>Name1}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Vendor Address" />
+                <table:template>
+                    <Input maxLength="100" value="{oTableItemModel>Address1}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Material Code" />
+                <table:template>
+                    <Input value="{oTableItemModel>Maktx}" editable="{oGenericModel>/editable}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequest">
+                        <customData>
+                            <core:CustomData key="MC" />
+                        </customData>
+                    </Input>
+                    <!-- <Input value="{oTableItemModel>Maktx}" submit="searchValue" showSuggestion="true" suggest="handleSuggest" suggestionItems="{path:'/MATERIAL', templateShareable:false}">
+                        <suggestionItems>
+                            <core:Item text="{Product}" />
+                        </suggestionItems>
+                    </Input> -->
+                    <!-- <Input maxLength="40" value="{oTableItemModel>Maktx}" showSuggestion="true" suggest="handleSuggest1" suggestionItems="{path:'/MATERIAL', templateShareable:false}" submit="searchMaterial">
+                        <suggestionItems>
+                            <core:Item text="{Product}" />
+                        </suggestionItems>
+                    </Input> -->
+                    <!-- <MultiInput valueHelpRequest=".onValueHelpWithSuggestionsRequested" suggestionRows="{path: '/MATERIAL', length: 10}">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="Product Code" />
+                            </Column>
+                            <Column>
+                                <Label text="Product Name" />
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Product}" />
+                                <Label text="{DESCRIPTION}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </MultiInput> -->
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Material Description" />
+                <table:template>
+                    <Input maxLength="40" value="{oTableItemModel>Matnr}" editable="{oGenericModel>/editable}" />
+                    <!-- <Input maxLength="40" value="{oTableItemModel>Matnr}" showSuggestion="true" suggest="handleSuggest2" suggestionItems="{path:'/MATERIAL', templateShareable:false}" submit="searchMaterial">
+                        <suggestionItems>
+                            <core:Item text="{DESCRIPTION}" />
+                        </suggestionItems>
+                    </Input> -->
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="HSN Code" />
+                <table:template>
+                    <Input maxLength="10" value="{oTableItemModel>Lpnum}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <!-- <table:Column width="11rem">
+                <Label text="Delivery Qty" />
+                <table:template>
+                    <Text text="{oTableItemModel>OrderQty}" wrapping="false" />
+                </table:template>
+            </table:Column> -->
+            <!-- <table:Column width="11rem">
+                <Label text="Order Qty" />
+                <table:template>
+                
+                    <Text text="{oTableItemModel>OrderQty}" wrapping="false" />
+                </table:template>
+            </table:Column> -->
+            <table:Column width="11rem" visible="{oGenericModel>/buttonVisible}">
+                <Label text="Gate Out Qty" />
+                <table:template>
+                    <Input maxLength="15" value="{oTableItemModel>OutQty}" editable="{oGenericModel>/gateDoneEditable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Gate Qty" />
+                <table:template>
+                    <Input maxLength="15" value="{oTableItemModel>GateQty}" liveChange="checkValue1" editable="{oGenericModel>/gateQtyEditable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem" visible="{oGenericModel>/buttonVisible}">
+                <Label text="Balanced Qty" />
+                <table:template>
+                    <Input maxLength="15" value="{oTableItemModel>OpenQty}" editable="{oGenericModel>/editableField}" />
+                </table:template>
+            </table:Column>
+            <!-- <table:Column width="11rem">
+                <Label text="Gate In Qty" />
+                <table:template>
+                    <Input value="{oTableItemModel>InQty}" submit="checkValue" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column> -->
+
+            <table:Column width="11rem">
+                <Label text="Unit" />
+                <table:template>
+                    <Input maxLength="3" value="{oTableItemModel>Uom}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <!-- <table:Column width="11rem">
+                <Label text="Department" />
+                <table:template>
+                    <Input value="{oTableItemModel>Department}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column> -->
+            <table:Column width="11rem">
+                <Label text="Remark" />
+                <table:template>
+                    <Input maxLength="100" value="{oTableItemModel>Remark}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Bill No./ Challan No." />
+                <table:template>
+                    <Input maxLength="16" value="{oTableItemModel>Zinvoice}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Amount" />
+                <table:template>
+                    <Input maxLength="15" value="{oTableItemModel>OutValue}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <!-- <table:Column width="11rem">
+                <Label text="Inv Date" />
+                <table:template>
+                    <Input value="{oTableItemModel>}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Quantity 2 Remarks" />
+                <table:template>
+                    <Input value="{oTableItemModel>OutQty}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>            
+            <table:Column width="11rem">
+                <Label text="Value" />
+                <table:template>
+                    <Input value="{oTableItemModel>}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column> -->
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

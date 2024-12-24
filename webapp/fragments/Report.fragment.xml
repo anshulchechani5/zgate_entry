@@ -1,0 +1,109 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable">
+    <!-- <table:Table rows="{oTableItemModel>/aTableItem}" selectionMode="None" ariaLabelledBy="title">
+        <table:extension>
+            <OverflowToolbar style="Clear">
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add" tooltip="Add item" press="onAddNewRows" />
+                <Button icon="sap-icon://delete" tooltip="Delete Table records" press="onDeleteSelectedData" />
+            </OverflowToolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="11rem">
+                <Label text="PO Number" />
+                <table:template>
+                    <Text text="{oTableItemModel>Ebeln}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Vendor Code" />
+                <table:template>
+                    <Text text="{oTableItemModel>Lifnr}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Name" />
+                <table:template>
+                    <Text text="{oTableItemModel>Name1}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Material Code" />
+                <table:template>
+                    <Input value="{oTableItemModel>Maktx}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Material Description" />
+                <table:template>
+                    <Input value="{oTableItemModel>Matnr}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Order Qty" />
+                <table:template>
+                    <Input value="{oTableItemModel>OrderQty}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Gate Qty" />
+                <table:template>
+                    <Input value="{oTableItemModel>GateQty}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Gate Done Qty" />
+                <table:template>
+                    <Input value="" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="UOM" />
+                <table:template>
+                    <Input value="{oTableItemModel>Uom}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Remarks" />
+                <table:template>
+                    <Input value="{oTableItemModel>Remark}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table> -->
+    <Dialog id="idDialog" contentHeight="100%">
+        <content>
+            <smartTable:SmartTable
+                id="LineItemsSmartTable"
+                entitySet="zgat"
+                showFullScreenButton="true"
+                tableType="Table"
+                beforeExport="onBeforeExport"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="Line Items"
+                showRowCount="true"
+                persistencyKey="SmartTableAnalytical_Explored"
+                enableAutoBinding="true"
+                class="sapUiResponsiveContentPadding"
+                enableAutoColumnWidth="true"
+                editTogglable="true"
+                initiallyVisibleFields="Gateno"
+            >
+                <!-- <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer />
+                            <OverflowToolbarButton icon="sap-icon://activate" tooltip="Apply UI state changes" press="applyUiState" />
+                        </OverflowToolbar>
+                    </smartTable:customToolbar> -->
+                <!-- layout data used to make the table growing but the filter bar fixed -->
+                <smartTable:layoutData>
+                    <FlexItemData growFactor="1" baseSize="0%" />
+                </smartTable:layoutData>
+            </smartTable:SmartTable>
+            
+        </content>
+        <endButton>
+            <Button text="Close" press="onClose"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,38 @@
+/* Enter your custom styles here */
+.Set_Pading {
+    padding-left: 12px;
+}
+.myBackgroundStyle {
+    padding-bottom: 120px ;
+    background-repeat:no-repeat;
+    background-position:bottom;
+    margin-bottom: 120px;
+     /* opacity: 0.4;  */
+    /* background: rgba(76, 175, 80, 0.3); */
+    animation: change 36s infinite;
+    font-size: large;
+}
+div[id*='form1'] div h5 {   
+    display: none !important;
+}
+@keyframes change {
+    0% {
+        background-image: url('gatepreview.png');
+    }
+
+    60% {
+        background-image: url('gatepass-01-01.png');    
+    }
+
+    100% {
+        background-image: url('gatepreview.png');
+    }
+
+    
+}
+.FontColorChange {
+    color: rgb(0, 0, 0);
+    opacity: 10;
+    font: bolder;
+    color: black;
+}

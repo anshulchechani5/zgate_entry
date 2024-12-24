@@ -1,0 +1,170 @@
+<mvc:View xmlns:table="sap.ui.table" controllerName="zgateentry.controller.GateEntryDetails"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <Page id="page" title="{i18n>title}" class="sapUiContentPadding">
+        <content>
+            <Panel id="p1" expandable="true" expanded="true" headerText="">
+                <headerToolbar>
+                    <OverflowToolbar id="a1" style="Clear">
+                        <Title id="a2" text="Gate Entry" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <f:SimpleForm id="a3" layout="ResponsiveGridLayout" columnsL="3" columnsXL="3" columnsM="2" editable="true">
+                    <f:content>
+                        <core:Title id="a4" text="Gate Entry Details" />
+                        <Label id="a5" text="Gate Entry No" />
+                        <Input id="idInput" value="{oGateEntryHeadModel>/Gateno}" editable="false" visible="true" />
+                        <Label id="a6" text="Gate Entry Type" />
+                        <Input id="idType" value="{oGateEntryHeadModel>/EntryType}" editable="false" visible="true" />
+                        <Label id="a7" text="Entry Date" />
+                        <DatePicker id="idEntryDate"  value="{oGateEntryHeadModel>/Entrydate}"  displayFormat="dd-MM-YYYY" valueFormat="YYYY-MM-dd" editable="false" />
+                        <Label id="a8" text="Vehicle No" required="true" />
+                        <Input placeholder="Enter vehicle no" maxLength="10" id="vehno" value="{oGateEntryHeadModel>/VehicalNo}" editable="{oGenericModel>/editable}" />
+                        <Label id="a9" text="Container No" />
+                        <Input placeholder="Enter Container no" visible="{=${oCommonModel>/displayObject/GateType} === '1' || ${oCommonModel>/displayObject/GateType} === '2'}" maxLength="12" id="idContainer" value="{oGateEntryHeadModel>/Container}" editable="{oGenericModel>/editable}" />
+                        <Label id="a10" text="Operator Name" required="true" />
+                        <Input id="idOpr" maxLength="40" value="{oGateEntryHeadModel>/Operator}" editable="{oGenericModel>/editable}" />
+                        <Label id="a11" text="Gate In Date" />
+                        <DatePicker id="picker0" change="fnChange" displayFormat="dd-MM-YYYY" valueFormat="YYYY-MM-dd" value="{oGateEntryHeadModel>/GateInDate}" editable="{oGenericModel>/gateInFlag}" />
+                        <Label id="a12" text="Gate In Time" />
+                        <TimePicker id="idGateInTime" displayFormat="HH:mm:ss" valueFormat="HH:mm:ss" change="dtChange" value="{oGateEntryHeadModel>/GateInTm}" editable="{oGenericModel>/gateInFlag}" />
+                        <Label id="a13" text="LR Date" />
+                        <DatePicker placeholder="Enter LR Date" editable="{oGenericModel>/editable}" id="idLrDate" displayFormat="dd-MM-YYYY" valueFormat="YYYY-MM-dd"  value="{oGateEntryHeadModel>/LrDate}" />
+                        <Label id="a14" text="LR Number" />
+                        <Input id="idLr" value="{oGateEntryHeadModel>/LrNo}" editable="{oGenericModel>/editable}" maxLength="20" />
+                        <Label id="a15" text="Weighing Slip No." />
+                        <Input id="a16" value="{oGateEntryHeadModel>/WtBrNo}" editable="{oGenericModel>/RefGateEditable}" visible="{oGenericModel>/weighslipvisible}" />
+                        <Label id="a17" text="Remark" />
+                        <Input id="idRmr" maxLength="100" value="{oGateEntryHeadModel>/Remark}" editable="{oGenericModel>/editable}" />
+                        <Label id="a18" text="Ref. Gate No." />
+                        <Input id="refGate" maxLength="10" submit="readGateData" value="{oGateEntryHeadModel>/RefGate}" editable="{oGenericModel>/RefGateEditable}" />
+
+                        <core:Title id="a19" />
+                        <Label id="a20" text="Plant" />
+                        <Input id="plant21" value="{oCommonModel>/plantObject/Plant}" description="{oCommonModel>/plantObject/PlantName}" editable="false" />
+                        <!-- <Label text="Approved" />
+                        <Input id="idAppr" value="{oGateEntryHeadModel>/Approved}" editable="{oGenericModel>/editable}" /> -->
+                        <Label id="a22" text="Purchase Group" />
+                        <!-- <Input id="idPurch" value="{oGateEntryHeadModel>/Puchgrp}" editable="{oGenericModel>/editable}" visible="{oGenericModel>/visible}" /> -->
+                        <ComboBox items="{/purchasegroup}" value="{oGateEntryHeadModel>/Puchgrp}" change="attachChange" showSecondaryValues="true" id="idPurchG" editable="{oGenericModel>/editable}" visible="{oGenericModel>/visible}">
+                            <items>
+                                <core:ListItem id="a23" text="{PurchasingGroup}" key="{PurchasingGroup}" additionalText="{PurchasingGroupName}" />
+                            </items>
+                        </ComboBox>
+                        <Label id="a121" text="Purchase Order Type" />
+                        <Input id="idpurchaseordertype"  visible="{oGenericModel>/visible}" editable="false" />
+                        <Label id="a24" text="Mode of Transport" />
+                        <Input id="idMode" maxLength="100" value="{oGateEntryHeadModel>/Name1}" editable="{oGenericModel>/editable}" />
+                        <Label id="a25" text="Driver Name" required="true" />
+                        <Input id="idDrv" maxLength="40" value="{oGateEntryHeadModel>/Driver}" editable="{oGenericModel>/editable}" />
+                        <Label id="a26" text="Driver License No" />
+                        <Input id="idLi" maxLength="30" value="{oGateEntryHeadModel>/DrLisc}" editable="{oGenericModel>/editable}" />
+                        <Label id="a27" text="Transporter Name" />
+                        <Input id="idTrp" value="{oGateEntryHeadModel>/TrOper}" editable="{oGenericModel>/editable}" maxLength="40" />
+                        <Label id="a28" text="Gate Out Date" />
+                        <DatePicker id="idOut" placeholder="Enter Date" value="{oGateEntryHeadModel>/GateOutDt}" change="fnChange" visible="{oGenericModel>/gateOutFlag}" displayFormat="dd-MM-YYYY" editable="{oGenericModel>/gateOutFlag}" valueFormat="YYYY-MM-dd" />
+                        <Label id="a29" text="Gate Out Time" />
+                        <TimePicker id="idTimeOut" displayFormat="HH:mm:ss" valueFormat="HH:mm:ss" value="{oGateEntryHeadModel>/GateOutTm}" visible="{oGenericModel>/gateOutFlag}" editable="{oGenericModel>/gateOutFlag}" />
+                        <Label id="a30" text="Driver Mobile No" />
+                        <Input id="idDrvno" maxLength="12" value="{oGateEntryHeadModel>/Driverno}" editable="{oGenericModel>/editable}" />
+                        <Label id="a31" text="Invoice no." required="true" />
+                        <Input id="idinvno" type="Text" liveChange="oninvoice" visible="{oGenericModel>/visible}" maxLength="20" value="{oGateEntryHeadModel>/Invoice}" editable="{oGenericModel>/editable}" />
+                        <Label id="a32" text="Invoice Date" />
+                        <DatePicker id="idInvoiceDate" displayFormat="dd-MM-YYYY" valueFormat="YYYY-MM-dd" visible="{oGenericModel>/visible}" editable="{oGenericModel>/invoiceDateEditable}" value="{oGateEntryHeadModel>/Invdt}" />
+                        <Label id="a33" text="{oGenericModel>/labelForType}" labelFor="idDel1" visible="{oGenericModel>/deliveryNumVisible}" />
+                        <!-- <Input id="idDel1" value="" maxLength="10" visible="{oGenericModel>/deliveryNumVisible}" required="true" /> -->
+                        <!-- <MultiInput id="idDel1" width="100%" visible="{oGenericModel>/deliveryNumVisible}" /> -->
+                        <MultiInput id="idDel1" maxLength="10" width="100%"   visible="{oGenericModel>/deliveryNumVisible}" />
+                        <!-- /////changes By Anshul multiple dlevery and po for  -->
+                        <Button id="a34" text="Go" press="onReadDeliveryData" visible="{oGenericModel>/deliveryNumVisible}" />
+                        <Title id="a59" />
+
+                        <core:Title id="a35" text="Weigh Bridge Details" />
+                        <!-- <Label text="Port No." />
+                        <ComboBox id="idPortNum" items="{oCommonModel>/gateInOut}" visible="{oCommonModel>/deliveryNumVisible}">
+                            <items>
+                                <core:Item key="{oCommonModel>Key}" text="{oCommonModel>Ddescription}" />
+                            </items>
+                        </ComboBox> -->
+                        <Label id="a36" text="Weight" />
+                        <VBox id="a37">
+                            <RadioButtonGroup id="idRadioWeight" columns="2">
+                                <buttons>
+                                    <RadioButton id="a38" text="Gross" />
+                                    <RadioButton id="a39" text="Tare" />
+                                </buttons>
+                            </RadioButtonGroup>
+                            <HBox id="a40" visible="true">
+                                <Text id="a41" text="Gross" class="sapUiTinyMarginEnd" />
+                                <Input id="idGross" visible="true" type="Number" placeholder="Gross Weight" editable="{oGenericModel>/editable}" value="{oWeightModel>/GrossWt}" submit="onSubmit">
+                                    <customData>
+                                        <core:CustomData key="grossWeight" />
+                                    </customData>
+                                </Input>
+                            </HBox>
+                            <HBox id="a42">
+                                <Text id="a43" text="Tare - " class="sapUiTinyMarginEnd" />
+                                <Input id="idTare" type="Number" placeholder="Tare Weight" editable="{oGenericModel>/editable}" value="{oTareWeightModel>/TareWt}" submit="onSubmit">
+                                    <customData>
+                                        <core:CustomData key="tareWeight" />
+                                    </customData>
+                                </Input>
+                            </HBox>
+                            <HBox id="a44">
+
+                                <Button id="weight1" text="Get Data" press="getWeight"></Button>
+                            </HBox>
+                            <!-- <Input placeholder="Operator Name" editable="{oGenericModel>/editable}"/> -->
+                        </VBox>
+                        <Label id="a45" text="Net Weight" />
+                        <Input id="idNet" type="Number" value="{oGateEntryHeadModel>/NetWt}" editable="false" />
+                        <Label id="a46" text="Slip No." />
+                        <Input id="a47" value="{oGateEntryHeadModel>/sleepno}" editable="{oGenericModel>/invoiceDateEditable}" visible="{oGenericModel>/invoiceDateEditable}" />
+                        <core:Title id="a48" />
+
+                        <Label id="a49" visible="{oGenericModel>/cancelVisible}" text="Cancel" />
+                        <CheckBox visible="{oGenericModel>/cancelVisible}" id="idCancel" text="Cancel/Delete" />
+                        <!-- <Label text="Total Piece" />
+                        <Input />
+                        <Label text="Total quantity" />
+                        <Input /> -->
+                    </f:content>
+                </f:SimpleForm>
+                <FlexBox id="a50" justifyContent="End">
+                    <items />
+                </FlexBox>
+            </Panel>
+            <VBox id="a51" visible="{=(${oCommonModel>/displayObject/GateType} === '2') || (${oCommonModel>/displayObject/GateType} === '1' || 
+                 (${oCommonModel>/displayObject/GateType} === '9' &amp;&amp;
+                  (${oCommonModel>/displayObject/Action} === 'Create' || ${oCommonModel>/displayObject/Action} === 'Gate Out' ||
+                   ${oCommonModel>/displayObject/Action} === 'Change' || ${oCommonModel>/displayObject/Action} === 'Display')))}">
+                <core:Fragment fragmentName="zgateentry.fragments.SalesOrSalesReturn" type="XML" />
+            </VBox>
+            <VBox id="a52" visible="{=${oCommonModel>/displayObject/GateType} === '3' || ${oCommonModel>/displayObject/GateType} === '4'}">
+                <core:Fragment fragmentName="zgateentry.fragments.ReturnableNonReturnable" type="XML" />
+            </VBox>
+            <VBox id="a53" visible="{=${oCommonModel>/displayObject/GateType} === '5'}">
+                <core:Fragment fragmentName="zgateentry.fragments.PurchaseOrder" type="XML" />
+            </VBox>
+            <VBox id="a54" visible="{=${oCommonModel>/displayObject/GateType} === '6'}">
+                <core:Fragment fragmentName="zgateentry.fragments.PurchaseReturn" type="XML" />
+            </VBox>
+            <VBox id="a78" visible="{=${oCommonModel>/displayObject/GateType} === '12'}">
+                <core:Fragment fragmentName="zgateentry.fragments.Jobworkgatein" type="XML" /> 
+            </VBox>
+        </content>
+        <footer>
+            <Bar id="a55">
+                <contentRight>
+                    <Button id="a56" icon="sap-icon://save" text="Save" type="Emphasized" press="handleSaveGateEntryData" visible="{=(${oCommonModel>/displayObject/GateType} === '1' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '1' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') || (${oCommonModel>/displayObject/GateType} === '1' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Gate Out') || (${oCommonModel>/displayObject/GateType} === '2' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '2' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') || (${oCommonModel>/displayObject/GateType} === '2' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Gate Out') || (${oCommonModel>/displayObject/GateType} === '9')}" />
+                    <Button id="a57" icon="sap-icon://save" text="Save" type="Emphasized" press="handleSaveGateEntryData" visible="{=(${oCommonModel>/displayObject/GateType} === '3' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '3' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') || (${oCommonModel>/displayObject/GateType} === '4' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '4' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') }" />
+                    <Button id="a58" icon="sap-icon://save" text="Save" type="Emphasized" press="handleSavePurchaseData" visible="{=(${oCommonModel>/displayObject/GateType} === '5' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '5' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') || (${oCommonModel>/displayObject/GateType} === '6' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '6' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change') || (${oCommonModel>/displayObject/GateType} === '12' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Create') || (${oCommonModel>/displayObject/GateType} === '12' &amp;&amp; ${oCommonModel>/displayObject/Action} === 'Change')}" />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

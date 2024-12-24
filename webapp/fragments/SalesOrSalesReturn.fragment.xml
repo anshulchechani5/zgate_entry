@@ -1,0 +1,91 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+    <table:Table id="table1" rows="{oTableItemModel>/aTableItem}" selectionMode="MultiToggle" ariaLabelledBy="title">
+        <table:extension>
+            <OverflowToolbar style="Clear">
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add" tooltip="Add item" press="onAddNewRows" visible="{=${oCommonModel>/displayObject/Action} !== 'Display'}"/>
+                <Button icon="sap-icon://delete" tooltip="Delete Table records" press="onDeleteSelectedData" visible="{=${oCommonModel>/displayObject/Action} !== 'Display'}"/>
+            </OverflowToolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="11rem">
+                <Label text="Sales Doc" />
+                <table:template>
+                    <Text text="{oTableItemModel>Sono}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Invoice" />
+                <table:template>
+                    <Text text="{oTableItemModel>Zinvoice}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Delivery No" />
+                <table:template>
+                    <Input maxLength="10" value="{oTableItemModel>Delievery}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Item" />
+                <table:template>
+                    <Input maxLength="6" value="{oTableItemModel>GateItem}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Customer Code" />
+                <table:template>
+                    <Input maxLength="10" value="{oTableItemModel>Lifnr}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Customer Name" />
+                <table:template>
+                    <Input maxLength="100" value="{oTableItemModel>Name1}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Material Code" />
+                <table:template>
+                    <Input maxLength="40" value="{oTableItemModel>Matnr}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Delivery Qty" />
+                <table:template>
+                    <Input value="{oTableItemModel>OrderQty}" editable="true"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Package" />
+                <table:template>
+                    <Input maxLength="20" value="{oTableItemModel>ZbagQty}"  editable="true" />
+                </table:template>
+            </table:Column>
+            <!-- <table:Column width="11rem">
+                <Label text="Open Quantity" />
+                <table:template>
+                    <Text text="{oTableItemModel>OpenQty}" wrapping="false" />
+                </table:template>
+            </table:Column> -->
+            <table:Column width="11rem">
+                <Label text="Material Description" />
+                <table:template>
+                    <Text text="{oTableItemModel>Maktx}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="UOM" />
+                <table:template>
+                    <Input maxLength="3" value="{oTableItemModel>Uom}" editable="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="11rem">
+                <Label text="Remarks" />
+                <table:template>
+                    <Input maxLength="100" value="{oTableItemModel>Remark}" editable="{oGenericModel>/editable}" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>
